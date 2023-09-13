@@ -20,11 +20,10 @@ const applibros = {
                     <summary>${libro.nombre}</summary>
                     ${libro.sinopsis}
                     </details>
-
                 </div>
                 `
                 
-            };
+            }
             console.log(contenidoHTML)
             contenedor.innerHTML=contenidoHTML;
         })
