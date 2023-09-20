@@ -29,6 +29,9 @@ const applibros = {
         })
         
         
+    },
+    agregarLibros:()=>{
+        alert("agregando un libro");
     }
 }
 applibros.listarLibros();
