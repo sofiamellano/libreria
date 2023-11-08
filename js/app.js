@@ -31,7 +31,7 @@ const applibros = {
                 </div>
                 `
             }
-            console.log(contenidoHTML)
+            //console.log(contenidoHTML)
             contenedor.innerHTML=contenidoHTML;
         })
         

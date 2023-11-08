@@ -1,5 +1,6 @@
 import { auth } from "./firebase.js";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+import { nuestroAlert } from "./nuestroAlert.js";
 
 
 const formRegristro=document.getElementById("registroForm")
@@ -12,7 +13,8 @@ formRegristro.addEventListener("submit",async (e)=>{
     try {
 
         //creamos el usuario
-        await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, email, password).then((credencialesUsuario)=>{
+            sendEmailVerification(auth.currentUser)});
 
         //tomamos referencia de la ventana modal
         const ventanaRegistro=document.getElementById("registrarseModal");
@@ -22,15 +24,6 @@ formRegristro.addEventListener("submit",async (e)=>{
         modal.hide(); 
     } catch (error) {
         console.log(error.code);
-
-        Toastify({
-            text: "Ups... Ocurrio un Problema"+error.code,
-            duration: 3000,
-            gravity: 'bottom',
-            position: 'right',
-            style: {
-                background: '#FF4136'
-            }
-            }).showToast();
+        nuestroAlert("Ups... Ocurrio un Problema"+error.code);
     }  
 })

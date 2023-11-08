@@ -1,5 +1,6 @@
 import { auth } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+import { nuestroAlert } from "./nuestroAlert.js";
 
 
 const formIniciarSesion=document.getElementById("iniciarSesionForm")
@@ -13,6 +14,7 @@ formIniciarSesion.addEventListener("submit",async (e)=>{
 
         //inicio de sesion del usuario
         var credencialesUsiario=await signInWithEmailAndPassword(auth, email, password);
+        if (credencialesUsiario.user.emailVerified){
 
         //tomamos referencia de la ventana modal
         const ventanaIniciarSesion=document.getElementById("iniciarSesionModal");
@@ -20,6 +22,10 @@ formIniciarSesion.addEventListener("submit",async (e)=>{
 
         //ocultamos la ventana
         modal.hide(); 
+    }
+        else {
+        nuestroAlert("Debes verificar tu correo electronico antes de iniciar sesion.")
+        }
     } catch (error) {
         console.log(error.code);
 
